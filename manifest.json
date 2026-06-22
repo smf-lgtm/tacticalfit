@@ -1,7 +1,7 @@
 {
-  "name": "TacticalFit V6",
+  "name": "TacticalFit V7",
   "short_name": "TacticalFit",
-  "description": "Tactical training system with workout types, readiness, active sessions and automatic PRs.",
+  "description": "Tactical training system with manual weights, automatic PRs and calorie tracking.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1115",
