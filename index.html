@@ -1,1 +1,106 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0f1115"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icons/icon-192.png"><title>TacticalFit V7</title><style>:root{--bg:#0f1115;--card:#1a1d24;--card2:#222733;--text:#f2f4f8;--muted:#a9b0bd;--accent:#f5b301;--good:#3ddc84;--bad:#ff5c5c;--line:#343a46}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);padding-bottom:96px}header{padding:22px 16px 14px;background:linear-gradient(160deg,#171b24,#0f1115);position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)}h1{font-size:24px;margin:0 0 6px}.small{color:var(--muted);font-size:13px;line-height:1.35}.tabs{display:flex;gap:8px;padding:10px 12px;background:#101319;position:sticky;top:82px;z-index:9;border-bottom:1px solid var(--line);overflow-x:auto}.tab{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 12px;border-radius:999px;white-space:nowrap;font-weight:700}.tab.active{background:var(--accent);color:#101010;border-color:var(--accent)}main{padding:14px}section{display:none}section.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 14px;box-shadow:0 8px 24px rgba(0,0,0,.2)}.card h2,.card h3{margin:0 0 10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.metric{background:var(--card2);border-radius:14px;padding:12px}.metric b{display:block;font-size:22px;color:var(--accent)}label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}input,select,textarea{width:100%;background:#101319;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px;font-size:16px}textarea{min-height:80px}button{border:0;border-radius:12px;padding:11px 13px;font-weight:800;background:var(--accent);color:#111;margin-top:8px}button.secondary{background:var(--card2);color:var(--text);border:1px solid var(--line)}.choice{background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:14px;margin:8px 0}.choice.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(245,179,1,.15)}.exercise{border-top:1px solid var(--line);padding:11px 0}.exercise:first-child{border-top:0}.logitem{border-left:4px solid var(--accent);padding:9px 10px;background:#131720;border-radius:10px;margin:8px 0}.pritem{border-left:4px solid var(--good);padding:12px;background:#121b17;border-radius:12px;margin:10px 0}.prtarget{background:#211d12;border:1px solid #6a4f00;padding:10px;border-radius:10px;margin-top:8px;color:#f7d77c}.sessionStep{background:#121720;border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}.bigtitle{font-size:28px;font-weight:900;color:var(--accent)}.progressbar{height:12px;background:#11151d;border-radius:999px;overflow:hidden;border:1px solid var(--line)}.progressbar span{display:block;height:100%;background:var(--accent);width:0%}.footerNav{position:fixed;bottom:0;left:0;right:0;background:#11151d;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 8px env(safe-area-inset-bottom)}.footerNav button{background:transparent;color:var(--muted);font-size:12px;margin:0;padding:8px}@media(min-width:700px){main{max-width:840px;margin:auto}.tabs{top:75px;justify-content:center}}</style></head><body><header><h1>TacticalFit V7</h1><div class="small">Training, PRs, running, bodyweight and calories in one simple tactical system.</div></header><div class="tabs"><button class="tab active" onclick="show('mission')">Mission</button><button class="tab" onclick="show('session')">Active</button><button class="tab" onclick="show('library')">Library</button><button class="tab" onclick="show('log')">Log</button><button class="tab" onclick="show('nutrition')">Calories</button><button class="tab" onclick="show('run')">Run</button><button class="tab" onclick="show('body')">Body</button><button class="tab" onclick="show('prs')">PRs</button></div><main><section id="mission" class="active"><div class="card"><h3>V7 Update</h3><div class="small">Weight is now manual entry. Calories and protein can now be tracked daily.</div></div><div class="card"><h2>Today's Mission</h2><label>How are you feeling?</label><div class="choice active" data-ready="green" onclick="selectReady('green')"><b>🟢 Green</b><br><span class="small">Ready to train hard</span></div><div class="choice" data-ready="amber" onclick="selectReady('amber')"><b>🟡 Amber</b><br><span class="small">Tired but can train</span></div><div class="choice" data-ready="red" onclick="selectReady('red')"><b>🔴 Red</b><br><span class="small">Sore, low energy, recovery needed</span></div><label>Workout Type</label><select id="missionType" onchange="previewMission()"><option value="hypertrophy">Hypertrophy</option><option value="tactical">Tactical Fitness</option><option value="police">Police Tactical Unit Prep</option><option value="selection">Special Forces / Selection Style</option><option value="travel">Caravan / Travel Mode</option><option value="mobility">Mobility / Recovery</option></select><div id="missionPreview" class="sessionStep"></div><button onclick="startMission()">Start This Session</button><button class="secondary" onclick="show('library')">Browse Workout Library</button></div><div class="card"><h2>Dashboard</h2><div class="grid"><div class="metric"><span>Sessions Logged</span><b id="mSessions">0</b></div><div class="metric"><span>Calories Today</span><b id="mCals">0</b></div><div class="metric"><span>Bodyweight</span><b id="mWeight">—</b></div><div class="metric"><span>Auto PRs</span><b id="mPRs">0</b></div></div></div></section><section id="session"><div class="card"><h2>Active Workout</h2><div id="activeSession"></div></div></section><section id="library"><div class="card"><h2>Workout Library</h2><label>Workout Category</label><select id="libraryType" onchange="renderLibrary()"><option value="hypertrophy">Hypertrophy</option><option value="tactical">Tactical Fitness</option><option value="police">Police Tactical Unit Prep</option><option value="selection">Special Forces / Selection Style</option><option value="travel">Caravan / Travel Mode</option><option value="mobility">Mobility / Recovery</option></select><div id="libraryList"></div></div></section><section id="log"><div class="card"><h2>Quick Log</h2><div class="grid"><div><label>Category</label><select id="logType" onchange="updateLogWorkout(); updateExerciseDropdown();"></select></div><div><label>Workout</label><select id="logWorkout" onchange="updateExerciseDropdown()"></select></div></div><label>Exercise</label><select id="exName"></select><label>Or custom exercise</label><input id="customEx" placeholder="Only use this if exercise is not listed"><div class="grid3"><div><label>Sets</label><select id="sets"></select></div><div><label>Reps</label><select id="reps"></select></div><div><label>Weight kg</label><input id="weight" type="number" step="0.5" inputmode="decimal" placeholder="e.g. 82.5"></div></div><label>RPE / Effort</label><select id="rpe"></select><label>Notes</label><textarea id="notes" placeholder="How did it feel?"></textarea><button onclick="saveLog()">Save Log</button> <button class="secondary" onclick="exportData()">Export Backup</button></div><div class="card"><h3>Recent Logs</h3><div id="logs"></div></div></section><section id="nutrition"><div class="card"><h2>Calorie Counter</h2><div class="grid"><div><label>Daily Calories Target</label><input id="calTarget" type="number" placeholder="e.g. 2400"></div><div><label>Daily Protein Target g</label><input id="proteinTarget" type="number" placeholder="e.g. 180"></div></div><button onclick="saveNutritionTargets()">Save Targets</button></div><div class="card"><h3>Add Food / Meal</h3><label>Date</label><input id="foodDate" type="date"><label>Meal / Food</label><input id="foodName" placeholder="Chicken, rice, coffee etc."><div class="grid3"><div><label>Calories</label><input id="foodCals" type="number" placeholder="500"></div><div><label>Protein g</label><input id="foodProtein" type="number" placeholder="40"></div><div><label>Carbs g</label><input id="foodCarbs" type="number" placeholder="50"></div></div><label>Fat g</label><input id="foodFat" type="number" placeholder="15"><button onclick="saveFood()">Add Food</button></div><div class="card"><h3>Today’s Nutrition</h3><div id="nutritionToday"></div></div><div class="card"><h3>Food Log</h3><div id="foodLogs"></div></div></section><section id="run"><div class="card"><h2>Run Builder</h2><label>Run Date</label><input id="runDate" type="date"><div class="grid"><div><label>Distance</label><input id="runDist" placeholder="3.0km"></div><div><label>Time</label><input id="runTime" placeholder="22:30"></div></div><label>RPE / Ankle Notes</label><textarea id="runNotes" placeholder="Easy pace, ankle felt good etc."></textarea><button onclick="saveRun()">Save Run</button></div><div class="card"><h3>Run History</h3><div id="runs"></div></div></section><section id="body"><div class="card"><h2>Bodyweight / Recovery</h2><label>Date</label><input id="bodyDate" type="date"><label>Bodyweight</label><input id="bodyWeight" placeholder="92.5kg"><label>Sleep / Recovery / Soreness</label><textarea id="bodyNotes" placeholder="Sleep, soreness, stress, ankle etc."></textarea><button onclick="saveBody()">Save Body Log</button></div><div class="card"><h3>Body Logs</h3><div id="bodyLogs"></div></div></section><section id="prs"><div class="card"><h2>Automatic PR Board</h2><div class="small">Calculated from saved logs using estimated 1RM for weighted work. Shows what you need to beat each PB.</div><div id="prList"></div></div></section></main><div class="footerNav"><button onclick="show('mission')">Mission</button><button onclick="show('session')">Active</button><button onclick="show('nutrition')">Calories</button><button onclick="show('log')">Log</button><button onclick="show('prs')">PRs</button></div><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1115" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="TacticalFit" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<title>TacticalFit V8</title>
+<style>
+:root{--bg:#0f1115;--card:#1a1d24;--card2:#222733;--text:#f2f4f8;--muted:#a9b0bd;--accent:#f5b301;--good:#3ddc84;--bad:#ff5c5c;--line:#343a46}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);padding-bottom:96px}
+header{padding:22px 16px 14px;background:linear-gradient(160deg,#171b24,#0f1115);position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)}
+h1{font-size:24px;margin:0 0 6px}.small{color:var(--muted);font-size:13px;line-height:1.35}
+.tabs{display:flex;gap:8px;padding:10px 12px;background:#101319;position:sticky;top:82px;z-index:9;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 12px;border-radius:999px;white-space:nowrap;font-weight:700}
+.tab.active{background:var(--accent);color:#101010;border-color:var(--accent)}
+main{padding:14px}section{display:none}section.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 14px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.card h2,.card h3{margin:0 0 10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.metric{background:var(--card2);border-radius:14px;padding:12px}.metric b{display:block;font-size:22px;color:var(--accent)}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}
+input,select,textarea{width:100%;background:#101319;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px;font-size:16px}
+textarea{min-height:80px}button{border:0;border-radius:12px;padding:11px 13px;font-weight:800;background:var(--accent);color:#111;margin-top:8px}
+button.secondary{background:var(--card2);color:var(--text);border:1px solid var(--line)}button.good{background:var(--good);color:#07130c}
+.choice{background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:14px;margin:8px 0}.choice.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(245,179,1,.15)}
+.exercise{border-top:1px solid var(--line);padding:11px 0}.exercise:first-child{border-top:0}
+.logitem{border-left:4px solid var(--accent);padding:9px 10px;background:#131720;border-radius:10px;margin:8px 0}
+.prtarget,.notice{background:#211d12;border:1px solid #6a4f00;padding:10px;border-radius:10px;margin-top:8px;color:#f7d77c}
+.bigtitle{font-size:26px;font-weight:900;color:var(--accent)}.foodPhoto{width:100%;border-radius:14px;border:1px solid var(--line);margin-top:10px;display:none}
+.progressbar{height:12px;background:#11151d;border-radius:999px;overflow:hidden;border:1px solid var(--line)}.progressbar span{display:block;height:100%;background:var(--accent);width:0%}
+.footerNav{position:fixed;bottom:0;left:0;right:0;background:#11151d;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 8px env(safe-area-inset-bottom)}
+.footerNav button{background:transparent;color:var(--muted);font-size:12px;margin:0;padding:8px}.footerNav button.active{color:var(--accent)}
+@media(min-width:700px){main{max-width:860px;margin:auto}.tabs{top:75px;justify-content:center}}
+</style>
+</head>
+<body>
+<header><h1>TacticalFit V8</h1><div class="small">Weekly training programs, daily sessions, photo-based nutrition workflow, calories and PRs.</div></header>
+<div class="tabs">
+<button class="tab active" onclick="show('mission')">Mission</button>
+<button class="tab" onclick="show('active')">Active</button>
+<button class="tab" onclick="show('programs')">Programs</button>
+<button class="tab" onclick="show('nutrition')">Calories</button>
+<button class="tab" onclick="show('log')">Log</button>
+<button class="tab" onclick="show('prs')">PRs</button>
+</div>
+
+<main>
+<section id="mission" class="active">
+<div class="card"><h2>Start Today’s Workout</h2>
+<label>Training Program</label><select id="missionProgram" onchange="updateMissionDays()"></select>
+<label>Day</label><select id="missionDay" onchange="previewMission()"></select>
+<label>Readiness</label><select id="missionReady" onchange="previewMission()"><option value="green">🟢 Green - Train hard</option><option value="amber">🟡 Amber - Reduce volume</option><option value="red">🔴 Red - Recovery option</option></select>
+<div id="missionPreview" class="card"></div>
+<button onclick="startMission()">Start Session</button>
+</div>
+<div class="card"><h2>Dashboard</h2><div class="grid">
+<div class="metric"><span>Sessions</span><b id="mSessions">0</b></div>
+<div class="metric"><span>Calories Today</span><b id="mCals">0</b></div>
+<div class="metric"><span>Protein Today</span><b id="mProtein">0g</b></div>
+<div class="metric"><span>Auto PRs</span><b id="mPRs">0</b></div>
+</div></div>
+</section>
+
+<section id="active"><div class="card"><h2>Active Session</h2><div id="activeSession"></div></div></section>
+
+<section id="programs"><div class="card"><h2>Weekly Programs</h2>
+<label>Program</label><select id="programView" onchange="renderProgramView()"></select>
+<div id="programDays"></div></div></section>
+
+<section id="nutrition">
+<div class="card"><h2>AI Photo Meal Counter</h2>
+<div class="notice"><b>Important:</b> Photo analysis UI is built in. Real AI food recognition needs an API/backend connected after upload to GitHub Pages.</div>
+<label>Meal Photo</label><input id="mealPhoto" type="file" accept="image/*" capture="environment" onchange="previewMealPhoto(event)">
+<img id="mealPreview" class="foodPhoto">
+<button class="secondary" onclick="mockAIAnalysis()">Analyse Photo</button>
+<div id="aiResult" class="notice" style="display:none"></div>
+</div>
+<div class="card"><h2>Daily Targets</h2><div class="grid"><div><label>Calories</label><input id="calTarget" type="number" placeholder="2400"></div><div><label>Protein g</label><input id="proteinTarget" type="number" placeholder="180"></div></div><button onclick="saveNutritionTargets()">Save Targets</button></div>
+<div class="card"><h3>Add / Confirm Meal</h3>
+<label>Date</label><input id="foodDate" type="date">
+<label>Meal / Food</label><input id="foodName" placeholder="Chicken rice bowl">
+<div class="grid3"><div><label>Calories</label><input id="foodCals" type="number"></div><div><label>Protein g</label><input id="foodProtein" type="number"></div><div><label>Carbs g</label><input id="foodCarbs" type="number"></div></div>
+<label>Fat g</label><input id="foodFat" type="number">
+<button onclick="saveFood()">Save Meal</button>
+</div>
+<div class="card"><h3>Today’s Nutrition</h3><div id="nutritionToday"></div></div>
+<div class="card"><h3>Food Log</h3><div id="foodLogs"></div></div>
+</section>
+
+<section id="log"><div class="card"><h2>Quick Log</h2>
+<label>Exercise</label><input id="quickExercise" placeholder="Bench Press">
+<div class="grid3"><div><label>Sets</label><select id="sets"></select></div><div><label>Reps</label><select id="reps"></select></div><div><label>Weight kg</label><input id="weight" type="number" step="0.5" inputmode="decimal"></div></div>
+<label>RPE</label><select id="rpe"></select><label>Notes</label><textarea id="notes"></textarea>
+<button onclick="saveQuickLog()">Save Log</button>
+</div><div class="card"><h3>Recent Logs</h3><div id="logs"></div></div></section>
+
+<section id="prs"><div class="card"><h2>Automatic PR Board</h2><div class="small">Calculated from saved logs. Shows what you need to beat each PB.</div><div id="prList"></div></div></section>
+</main>
+<div class="footerNav"><button onclick="show('mission')">Mission</button><button onclick="show('active')">Active</button><button onclick="show('nutrition')">Calories</button><button onclick="show('programs')">Programs</button><button onclick="show('prs')">PRs</button></div>
+<script src="app.js"></script>
+</body></html>

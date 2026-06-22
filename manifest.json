@@ -1,7 +1,7 @@
 {
-  "name": "TacticalFit V7",
+  "name": "TacticalFit V8",
   "short_name": "TacticalFit",
-  "description": "Tactical training system with manual weights, automatic PRs and calorie tracking.",
+  "description": "Weekly tactical training programs and photo nutrition workflow.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1115",
