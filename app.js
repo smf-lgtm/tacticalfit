@@ -1,9 +1,9 @@
 const weeklyPrograms={
 hypertrophy:{label:"Hypertrophy",days:{
 Monday:{title:"Upper Push Hypertrophy",exercises:["Bench Press 4x8","Incline DB Press 3x10","DB Shoulder Press 3x10","Lateral Raise 3x15","Tricep Pushdown 3x12","Plank 3x60 sec"]},
-Tuesday:{title:"Lower Hypertrophy",exercises:["Back Squat 4x8","Romanian Deadlift 4x10","Walking Lunge 3x12 each","Leg Press 3x15","Hamstring Curl 3x12","Calf Raise 4x20"]},
-Wednesday:{title:"Pull Hypertrophy",exercises:["Weighted Pull-Up 4x6-8","Seated Row 4x10","Lat Pulldown 3x12","Chest Supported Row 3x12","Rear Delt Fly 3x15","Bicep Curl 3x12"]},
-Thursday:{title:"Zone 2 + Mobility",exercises:["Zone 2 Run 30 min","Knee to Wall 3x10 each","Couch Stretch 90 sec each","90/90 Hip Stretch 60 sec each","Deep Squat Hold 2 min"]},
+Tuesday:{title:"Run Builder + Mobility",exercises:["Run Builder Session","Knee to Wall 3x10 each","Couch Stretch 90 sec each","Calf Stretch 60 sec each"]},
+Wednesday:{title:"Lower Hypertrophy",exercises:["Back Squat 4x8","Romanian Deadlift 4x10","Walking Lunge 3x12 each","Leg Press 3x15","Hamstring Curl 3x12","Calf Raise 4x20"]},
+Thursday:{title:"Pull Hypertrophy",exercises:["Weighted Pull-Up 4x6-8","Seated Row 4x10","Lat Pulldown 3x12","Chest Supported Row 3x12","Rear Delt Fly 3x15","Bicep Curl 3x12"]},
 Friday:{title:"Upper Full Hypertrophy",exercises:["DB Bench Press 4x10","Pull-Up 4xMax","Shoulder Press 3x10","Cable Row 3x12","Lateral Raise 3x15","Face Pull 3x15"]},
 Saturday:{title:"Long Run + Core",exercises:["Long Run 3-5km","Hanging Leg Raise 3x12","Side Plank 3x45 sec each","Calf Raise 3x20"]},
 Sunday:{title:"Recovery",exercises:["Walk 30 min","Child's Pose 60 sec","Open Book 10 each","Pigeon Stretch 60 sec each"]}}},
@@ -11,7 +11,7 @@ tactical:{label:"Tactical Fitness",days:{
 Monday:{title:"Tactical Upper",exercises:["Weighted Pull-Up 5x5","DB Bench Press 4x10","Farmer Carry 5x40m","Push-Up 4xMax","Plank 3x90 sec"]},
 Tuesday:{title:"Run Intervals",exercises:["Run 400m x6","Walk 90 sec between","Calf Stretch 60 sec each","Tibialis Raise 3x15"]},
 Wednesday:{title:"Loaded Lower",exercises:["Trap Bar Deadlift 5x5","Sandbag Squat 5x10","Walking Lunge 4x20m","Sled Push 6x20m","Farmer Carry 4x40m"]},
-Thursday:{title:"Mobility + Zone 2",exercises:["Zone 2 Run 35 min","Couch Stretch 90 sec each","90/90 Hip Stretch 60 sec each","Open Book 10 each"]},
+Thursday:{title:"Zone 2 + Mobility",exercises:["Zone 2 Run 35 min","Couch Stretch 90 sec each","90/90 Hip Stretch 60 sec each","Open Book 10 each"]},
 Friday:{title:"Work Capacity Circuit",exercises:["Row 500m x4","Kettlebell Swing 4x20","Burpee 4x10","Sandbag Carry 4x50m","Sit-Up 4x25"]},
 Saturday:{title:"Ruck / Pack Walk",exercises:["Pack Walk 45-60 min","Step-Up 4x20 each","Calf Raise 4x25","Deep Squat Hold 2 min"]},
 Sunday:{title:"Recovery",exercises:["Walk 30 min","Recovery Reset Mobility 15 min"]}}},
@@ -29,14 +29,20 @@ Tuesday:{title:"Run + Mobility",exercises:["Easy Run 25 min","Knee to Wall","Cou
 Wednesday:{title:"Campground Lower",exercises:["Bodyweight Squat 5x25","Reverse Lunge 4x15 each","Step-Up 4x15 each","Calf Raise 4x25"]},
 Thursday:{title:"Recovery Mobility",exercises:["Walk 30 min","90/90 Hip Stretch","Pigeon Stretch","Open Book"]},
 Friday:{title:"Travel Circuit",exercises:["Push-Up 15","Air Squat 25","Band Row 20","Mountain Climber 30","Repeat 5 rounds"]},
-Saturday:{title:"Long Walk / Hike",exercises:["Walk or Hike 45-90 min","Stretch 10 min"]},
+Saturday:{title:"Long Walk / Hike / Run",exercises:["Walk, hike or easy run 45-90 min","Stretch 10 min"]},
 Sunday:{title:"Rest",exercises:["Easy walk","Light mobility"]}}}
+};
+const runPlan={
+1:{main:"Run 2 min / Walk 1 min x 8",long:"3km easy",focus:"Build rhythm and protect the ankle"},
+2:{main:"Run 3 min / Walk 1 min x 7",long:"3.5km easy",focus:"Slightly longer running blocks"},
+3:{main:"Run 5 min / Walk 1 min x 5",long:"4km easy",focus:"Build aerobic confidence"},
+4:{main:"Run 10 min / Walk 1 min x 3",long:"5km attempt",focus:"Complete 5km, pace does not matter"}
 };
 let activeWorkout=null,activeIndex=0;
 function get(k){return JSON.parse(localStorage.getItem(k)||"[]")}function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
 function today(){return new Date().toISOString().slice(0,10)}
-function init(){["foodDate"].forEach(id=>{let e=document.getElementById(id);if(e)e.value=today()});populateSelectors();loadNutritionTargets();previewMission();renderAll();if("serviceWorker" in navigator){navigator.serviceWorker.register("./sw.js")}}
-function populateSelectors(){let p=Object.keys(weeklyPrograms).map(k=>`<option value="${k}">${weeklyPrograms[k].label}</option>`).join("");missionProgram.innerHTML=p;programView.innerHTML=p;sets.innerHTML=Array.from({length:12},(_,i)=>`<option ${i+1===3?"selected":""}>${i+1}</option>`).join("");reps.innerHTML=Array.from({length:30},(_,i)=>`<option ${i+1===8?"selected":""}>${i+1}</option>`).join("");rpe.innerHTML=Array.from({length:10},(_,i)=>`<option ${i+1===8?"selected":""}>${i+1}/10</option>`).join("");updateMissionDays()}
+function init(){["foodDate","runDate"].forEach(id=>{let e=document.getElementById(id);if(e)e.value=today()});populateSelectors();loadNutritionTargets();previewMission();renderAll();if("serviceWorker" in navigator){navigator.serviceWorker.register("./sw.js")}}
+function populateSelectors(){let p=Object.keys(weeklyPrograms).map(k=>`<option value="${k}">${weeklyPrograms[k].label}</option>`).join("");missionProgram.innerHTML=p;programView.innerHTML=p;sets.innerHTML=Array.from({length:12},(_,i)=>`<option ${i+1===3?"selected":""}>${i+1}</option>`).join("");reps.innerHTML=Array.from({length:30},(_,i)=>`<option ${i+1===8?"selected":""}>${i+1}</option>`).join("");rpe.innerHTML=Array.from({length:10},(_,i)=>`<option ${i+1===8?"selected":""}>${i+1}/10</option>`).join("");runRpe.innerHTML=rpe.innerHTML;anklePain.innerHTML=Array.from({length:11},(_,i)=>`<option ${i===0?"selected":""}>${i}/10</option>`).join("");updateMissionDays()}
 function updateMissionDays(){let days=Object.keys(weeklyPrograms[missionProgram.value].days);missionDay.innerHTML=days.map(d=>`<option>${d}</option>`).join("");previewMission()}
 function selectedDayWorkout(){let base=weeklyPrograms[missionProgram.value].days[missionDay.value];let ready=missionReady.value;if(ready==="red")return {title:"Recovery Replacement",exercises:["Walk 20-30 min","Child's Pose 60 sec","Couch Stretch 90 sec each","90/90 Hip Stretch 60 sec each","Deep Breathing 3 min"]};if(ready==="amber")return {...base,title:base.title+" - Reduced Volume",exercises:base.exercises.slice(0,Math.max(3,Math.ceil(base.exercises.length*.7)))};return base}
 function previewMission(){if(!missionProgram.value)return;let w=selectedDayWorkout();missionPreview.innerHTML=`<div class="bigtitle">${missionDay.value}: ${w.title}</div>${w.exercises.map(x=>`<div class="exercise">${x}</div>`).join("")}`}
@@ -46,6 +52,14 @@ function saveActiveExercise(){let ex=activeWorkout.exercises[activeIndex],w=pars
 function skipExercise(){activeIndex++;localStorage.setItem("activeIndex",String(activeIndex));renderActive()}
 function finishWorkout(){let s=get("sessions");s.push({date:today(),program:activeWorkout.program,title:activeWorkout.title});set("sessions",s);localStorage.removeItem("activeWorkout");localStorage.removeItem("activeIndex");activeWorkout=null;activeIndex=0;renderAll();show("mission")}
 function renderProgramView(){let pg=weeklyPrograms[programView.value];programDays.innerHTML=Object.entries(pg.days).map(([d,w])=>`<div class="card"><h3>${d}: ${w.title}</h3>${w.exercises.map(x=>`<div class="exercise">${x}</div>`).join("")}</div>`).join("")}
+function renderRunPlan(){let w=runWeek.value, p=runPlan[w];runPlanView.innerHTML=`<div class="bigtitle">Week ${w}</div><div class="exercise"><b>Main Run:</b> ${p.main}</div><div class="exercise"><b>Long Run:</b> ${p.long}</div><div class="exercise"><b>Focus:</b> ${p.focus}</div>`}
+function saveRun(){let runs=get("runs");runs.push({date:runDate.value||today(),dist:+runDist.value||0,time:runTime.value,rpe:runRpe.value,ankle:anklePain.value,notes:runNotes.value});set("runs",runs);["runDist","runTime","runNotes"].forEach(id=>document.getElementById(id).value="");renderAll()}
+function secondsFromTime(t){if(!t)return 0;let parts=t.split(":").map(Number);if(parts.length===2)return parts[0]*60+parts[1];if(parts.length===3)return parts[0]*3600+parts[1]*60+parts[2];return 0}
+function pace(dist,time){let s=secondsFromTime(time);if(!dist||!s)return "—";let per=s/dist;let m=Math.floor(per/60), sec=Math.round(per%60).toString().padStart(2,"0");return `${m}:${sec}/km`}
+function weekStart(){let d=new Date();let day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);d.setHours(0,0,0,0);return d}
+function weeklyKm(){let ws=weekStart();return get("runs").filter(r=>new Date(r.date)>=ws).reduce((s,r)=>s+(+r.dist||0),0)}
+function renderRunDashboard(){let runs=get("runs");let longest=runs.reduce((m,r)=>Math.max(m,+r.dist||0),0);let fastest5=runs.filter(r=>(+r.dist||0)>=5 && secondsFromTime(r.time)>0).sort((a,b)=>secondsFromTime(a.time)-secondsFromTime(b.time))[0];runDashboard.innerHTML=`<div class="grid"><div class="metric"><span>Weekly KM</span><b>${weeklyKm().toFixed(1)}</b></div><div class="metric"><span>Longest Run</span><b>${longest.toFixed(1)}km</b></div><div class="metric"><span>Fastest 5km</span><b>${fastest5?fastest5.time:"—"}</b></div><div class="metric"><span>Total Runs</span><b>${runs.length}</b></div></div>`}
+function renderRunLogs(){runLogs.innerHTML=get("runs").slice(-12).reverse().map(r=>`<div class="logitem"><b>${r.dist}km</b> — ${r.time||"—"} (${pace(r.dist,r.time)})<br>RPE ${r.rpe||"—"} | Ankle ${r.ankle||"—"}<br><span class="small">${r.date} ${r.notes||""}</span></div>`).join("")||"<div class='small'>No runs logged yet.</div>"}
 function show(id){document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));[...document.querySelectorAll(".tab")].find(b=>b.textContent.toLowerCase().includes(id==="prs"?"prs":id))?.classList.add("active");renderAll()}
 function previewMealPhoto(e){let file=e.target.files[0];if(!file)return;let url=URL.createObjectURL(file);mealPreview.src=url;mealPreview.style.display="block";aiResult.style.display="none"}
 function mockAIAnalysis(){aiResult.style.display="block";aiResult.innerHTML="<b>AI connection required:</b><br>This button is ready for backend/API integration. Once connected, it will identify food items, estimate portion size, calories, protein, carbs and fat, then pre-fill the meal form for confirmation."}
@@ -63,6 +77,6 @@ function lastForExercise(name){let ex=normaliseExerciseName(name);return get("lo
 function buildPRs(){let prs={};get("logs").forEach(l=>{let w=+l.weightNum||+l.weight||0,r=+l.repsNum||0;if(!w||!r)return;let ex=normaliseExerciseName(l.ex),e=l.e1rm||calcE1RM(w,r);if(!prs[ex]||e>prs[ex].e1rm)prs[ex]={exercise:ex,weight:w,reps:r,date:l.date,e1rm:e}});return Object.values(prs).sort((a,b)=>b.e1rm-a.e1rm)}
 function targetForNewPR(p){let target=p.e1rm+.1;let nextWeight=Math.max(Math.ceil(((target/(1+p.reps/30))*2))/2,p.weight+.5);let repsNeeded=Math.floor(((target/p.weight)-1)*30)+1;return {a:`${nextWeight.toFixed(nextWeight%1?1:0)}kg x ${p.reps}`,b:`${p.weight.toFixed(p.weight%1?1:0)}kg x ${Math.max(repsNeeded,p.reps+1)}`}}
 function renderPRs(){let prs=buildPRs();prList.innerHTML=prs.length?prs.map(p=>{let t=targetForNewPR(p);return `<div class="logitem"><h3>${p.exercise}</h3><b>PB:</b> ${p.weight}kg x ${p.reps}<br><span class="small">Est 1RM: ${p.e1rm.toFixed(1)}kg</span><div class="prtarget"><b>To beat:</b><br>${t.a}<br>${t.b}</div></div>`}).join(""):"<div class='small'>No PRs yet.</div>"}
-function renderDashboard(){let foods=todayFoods();mSessions.textContent=get("sessions").length;mCals.textContent=foods.reduce((s,f)=>s+f.cals,0);mProtein.textContent=foods.reduce((s,f)=>s+f.protein,0)+"g";mPRs.textContent=buildPRs().length}
-function renderAll(){renderDashboard();renderProgramView();renderActive();renderNutrition();renderLogs();renderPRs()}
+function renderDashboard(){let foods=todayFoods();mSessions.textContent=get("sessions").length;mWeeklyKm.textContent=weeklyKm().toFixed(1);mCals.textContent=foods.reduce((s,f)=>s+f.cals,0);mPRs.textContent=buildPRs().length}
+function renderAll(){renderDashboard();renderProgramView();renderActive();renderRunPlan();renderRunDashboard();renderRunLogs();renderNutrition();renderLogs();renderPRs()}
 init();

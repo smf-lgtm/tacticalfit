@@ -1,7 +1,7 @@
 {
-  "name": "TacticalFit V8",
+  "name": "TacticalFit V9",
   "short_name": "TacticalFit",
-  "description": "Weekly tactical training programs and photo nutrition workflow.",
+  "description": "Training, running, nutrition and PR tracking.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1115",
