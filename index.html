@@ -31,6 +31,8 @@ button.secondary{background:var(--card2);color:var(--text);border:1px solid var(
 .exercise{border-top:1px solid var(--line);padding:11px 0}.exercise:first-child{border-top:0}
 .row{display:flex;align-items:center;justify-content:space-between;gap:10px}.check{width:24px;height:24px}
 .logitem{border-left:4px solid var(--accent);padding:9px 10px;background:#131720;border-radius:10px;margin:8px 0}
+.pritem{border-left:4px solid var(--good);padding:12px;background:#121b17;border-radius:12px;margin:10px 0}
+.prtarget{background:#211d12;border:1px solid #6a4f00;padding:10px;border-radius:10px;margin-top:8px;color:#f7d77c}
 .progressbar{height:12px;background:#11151d;border-radius:999px;overflow:hidden;border:1px solid var(--line)}.progressbar span{display:block;height:100%;background:var(--accent);width:0%}
 .installBox{background:#211d12;border:1px solid #6a4f00}
 .footerNav{position:fixed;bottom:0;left:0;right:0;background:#11151d;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 8px env(safe-area-inset-bottom)}
@@ -89,8 +91,10 @@ button.secondary{background:var(--card2);color:var(--text);border:1px solid var(
 </section>
 
 <section id="prs">
-<div class="card"><h2>Personal Records</h2><label>Lift / Test</label><input id="prName" placeholder="Bench Press / 5km / Farmer Carry"><label>Result</label><input id="prResult" placeholder="100kg x 5 / 5km in 28:00"><label>Date</label><input id="prDate" type="date"><button onclick="savePR()">Save PR</button></div>
-<div class="card"><h3>PR Board</h3><div id="prList"></div></div>
+<div class="card"><h2>Automatic PR Board</h2>
+<div class="small">PRs are now calculated automatically from your saved workout logs. The app ranks each exercise by estimated 1-rep max, then shows what you need to beat it.</div>
+<div id="prList"></div>
+</div>
 </section>
 </main>
 <div class="footerNav"><button onclick="show('dashboard')">Dashboard</button><button onclick="show('plan')">Program</button><button onclick="show('log')">Log</button><button onclick="show('run')">Run</button><button onclick="show('body')">Body</button></div>
