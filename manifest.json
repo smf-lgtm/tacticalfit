@@ -1,7 +1,7 @@
 {
-  "name": "TacticalFit - 4 Week Tracker",
+  "name": "TacticalFit V6",
   "short_name": "TacticalFit",
-  "description": "4-week hypertrophy, tactical conditioning and 5km running tracker.",
+  "description": "Tactical training system with workout types, readiness, active sessions and automatic PRs.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1115",
