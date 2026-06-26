@@ -1,6 +1,7 @@
 {
-  "name": "TacticalFit V10",
+  "name": "TacticalFit V11",
   "short_name": "TacticalFit",
+  "description": "Tactical performance operating system.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1115",

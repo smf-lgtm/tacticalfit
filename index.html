@@ -1,30 +1,122 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f1115"><meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="manifest" href="manifest.json"><title>TacticalFit V10</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1115">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TacticalFit">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>TacticalFit V11</title>
 <style>
-:root{--bg:#0f1115;--card:#1a1d24;--card2:#222733;--text:#f2f4f8;--muted:#a9b0bd;--accent:#f5b301;--good:#3ddc84;--bad:#ff5c5c;--line:#343a46}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;padding-bottom:90px}
-header{padding:20px 16px;background:#121722;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:9}h1{margin:0;font-size:24px}.small{color:var(--muted);font-size:13px}
-.tabs{display:flex;gap:8px;padding:10px;background:#101319;overflow-x:auto;position:sticky;top:73px;z-index:8;border-bottom:1px solid var(--line)}
-.tab{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-weight:800;white-space:nowrap}.tab.active{background:var(--accent);color:#111}
-main{padding:14px;max-width:900px;margin:auto}section{display:none}section.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.metric{background:var(--card2);border-radius:14px;padding:12px}.metric b{display:block;font-size:22px;color:var(--accent)}
-label{display:block;color:var(--muted);font-size:13px;margin:10px 0 5px}input,select,textarea{width:100%;background:#101319;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px;font-size:16px}textarea{min-height:80px}
-button{border:0;border-radius:12px;padding:11px 13px;font-weight:900;background:var(--accent);color:#111;margin-top:8px}button.secondary{background:var(--card2);color:var(--text);border:1px solid var(--line)}button.good{background:var(--good);color:#07130c}
-.exercise{border-top:1px solid var(--line);padding:10px 0}.exercise:first-child{border-top:0}.logitem{border-left:4px solid var(--accent);background:#131720;border-radius:10px;margin:8px 0;padding:10px}.notice{background:#211d12;border:1px solid #6a4f00;border-radius:10px;padding:10px;margin:8px 0;color:#f7d77c}.goodbox{background:#102018;border:1px solid #236b43;color:#9ef0bf;border-radius:10px;padding:10px;margin:8px 0}.badbox{background:#261214;border:1px solid #7a2e37;color:#ffb6bd;border-radius:10px;padding:10px;margin:8px 0}
-.big{font-size:25px;font-weight:900;color:var(--accent)}.footer{position:fixed;bottom:0;left:0;right:0;background:#11151d;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 8px env(safe-area-inset-bottom)}.footer button{background:transparent;color:var(--muted);font-size:12px;padding:8px;margin:0}
-</style></head><body>
-<header><h1>TacticalFit V10</h1><div class="small">Training, running, calories, PRs and automatic 4-week block progression.</div></header>
+:root{--bg:#0f1115;--panel:#151922;--card:#1a1f2b;--card2:#222938;--text:#f4f6fa;--muted:#a8b0bf;--accent:#f5b301;--green:#3ddc84;--red:#ff5c5c;--line:#343c4a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:92px}
+header{padding:18px 16px;background:linear-gradient(160deg,#1a2030,#0f1115);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+h1{font-size:25px;margin:0}.small{font-size:13px;color:var(--muted);line-height:1.35}.muted{color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow-x:auto;background:#10141c;padding:10px;border-bottom:1px solid var(--line);position:sticky;top:75px;z-index:9}
+.tab{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-weight:800;white-space:nowrap}.tab.active{background:var(--accent);color:#111;border-color:var(--accent)}
+main{max-width:960px;margin:auto;padding:14px}section{display:none}section.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:14px;box-shadow:0 10px 25px rgba(0,0,0,.18)}
+.card h2,.card h3{margin:0 0 10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.metric{background:var(--card2);border-radius:14px;padding:12px}.metric span{font-size:12px;color:var(--muted)}.metric b{display:block;color:var(--accent);font-size:24px;margin-top:4px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}input,select,textarea{width:100%;background:#10141c;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px;font-size:16px}textarea{min-height:80px}
+button{border:0;border-radius:12px;padding:11px 13px;background:var(--accent);color:#111;font-weight:900;margin-top:8px}button.secondary{background:var(--card2);color:var(--text);border:1px solid var(--line)}button.green{background:var(--green);color:#06130b}button.red{background:var(--red);color:#fff}
+.exercise{border-top:1px solid var(--line);padding:10px 0}.exercise:first-child{border-top:0}.logitem{border-left:4px solid var(--accent);background:#121722;border-radius:12px;padding:10px;margin:8px 0}
+.notice{background:#211d12;border:1px solid #6a4f00;color:#f7d77c;border-radius:12px;padding:10px;margin:8px 0}.goodbox{background:#102018;border:1px solid #236b43;color:#9ef0bf;border-radius:12px;padding:10px;margin:8px 0}.badbox{background:#261214;border:1px solid #7a2e37;color:#ffb6bd;border-radius:12px;padding:10px;margin:8px 0}
+.big{font-size:28px;font-weight:950;color:var(--accent)}.score{font-size:46px;font-weight:950;color:var(--accent);line-height:1}
+.progress{height:12px;background:#0e1219;border:1px solid var(--line);border-radius:999px;overflow:hidden}.progress span{display:block;height:100%;background:var(--accent);width:0%}
+.footer{position:fixed;bottom:0;left:0;right:0;background:#10141c;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 6px env(safe-area-inset-bottom)}
+.footer button{background:transparent;color:var(--muted);font-size:11px;margin:0;padding:8px 4px}.footer button.active{color:var(--accent)}
+img.preview{width:100%;border-radius:14px;border:1px solid var(--line);margin-top:10px;display:none}
+@media(max-width:430px){.grid,.grid3{grid-template-columns:1fr 1fr}.score{font-size:40px}}
+</style>
+</head>
+<body>
+<header><h1>TacticalFit V11</h1><div class="small">Mission Control for tactical training, running, nutrition, recovery, readiness and adaptive programming.</div></header>
 <div class="tabs">
-<button class="tab active" onclick="show('mission')">Mission</button><button class="tab" onclick="show('active')">Active</button><button class="tab" onclick="show('blocks')">Blocks</button><button class="tab" onclick="show('programs')">Programs</button><button class="tab" onclick="show('run')">Run</button><button class="tab" onclick="show('nutrition')">Calories</button><button class="tab" onclick="show('log')">Log</button><button class="tab" onclick="show('prs')">PRs</button>
-</div><main>
-<section id="mission" class="active"><div class="card"><h2>Start Today’s Workout</h2><label>Program</label><select id="program" onchange="updateDays()"></select><label>Day</label><select id="day" onchange="preview()"></select><label>Readiness</label><select id="ready" onchange="preview()"><option value="green">🟢 Green - Train hard</option><option value="amber">🟡 Amber - Reduced volume</option><option value="red">🔴 Red - Recovery</option></select><div id="preview" class="card"></div><button onclick="startSession()">Start Session</button></div><div class="card"><h2>Dashboard</h2><div class="grid"><div class="metric"><span>Block</span><b id="mBlock">1</b></div><div class="metric"><span>Weekly KM</span><b id="mKm">0</b></div><div class="metric"><span>Calories Today</span><b id="mCal">0</b></div><div class="metric"><span>PRs</span><b id="mPr">0</b></div></div></div></section>
-<section id="active"><div class="card"><h2>Active Session</h2><div id="activeBox"></div></div></section>
-<section id="blocks"><div class="card"><h2>4-Week Block Engine</h2><div class="small">Review the current block, generate the next 4-week block, then apply it when ready.</div><div id="blockStatus"></div><button onclick="reviewBlock()">Run Block Review</button> <button class="secondary" onclick="generateBlock()">Generate Next Block</button> <button class="good" onclick="applyBlock()">Apply Recommended Block</button></div><div class="card"><h3>Review</h3><div id="reviewBox"></div></div><div class="card"><h3>Next Block Preview</h3><div id="nextBox"></div></div></section>
-<section id="programs"><div class="card"><h2>Weekly Programs</h2><label>Program</label><select id="programView" onchange="renderPrograms()"></select><div id="programBox"></div></div></section>
-<section id="run"><div class="card"><h2>5km Run Builder</h2><label>Week</label><select id="runWeek" onchange="renderRun()"><option>1</option><option>2</option><option>3</option><option>4</option></select><div id="runPlan"></div></div><div class="card"><h3>Log Run</h3><label>Date</label><input id="runDate" type="date"><div class="grid3"><div><label>Distance km</label><input id="runDist" type="number" step="0.1"></div><div><label>Time</label><input id="runTime" placeholder="25:00"></div><div><label>RPE</label><select id="runRpe"></select></div></div><label>Ankle Pain</label><select id="ankle"></select><label>Notes</label><textarea id="runNotes"></textarea><button onclick="saveRun()">Save Run</button></div><div class="card"><h3>Run Dashboard</h3><div id="runDash"></div></div><div class="card"><h3>Run History</h3><div id="runLogs"></div></div></section>
-<section id="nutrition"><div class="card"><h2>Calories</h2><div class="notice">Photo AI meal analysis still needs backend/API connection. Manual macro logging works now.</div><div class="grid"><div><label>Daily Calories</label><input id="calTarget" type="number"></div><div><label>Protein Target g</label><input id="proteinTarget" type="number"></div></div><button onclick="saveTargets()">Save Targets</button></div><div class="card"><h3>Add Meal</h3><label>Date</label><input id="foodDate" type="date"><label>Meal</label><input id="foodName"><div class="grid3"><div><label>Calories</label><input id="foodCals" type="number"></div><div><label>Protein</label><input id="foodProtein" type="number"></div><div><label>Carbs</label><input id="foodCarbs" type="number"></div></div><label>Fat</label><input id="foodFat" type="number"><button onclick="saveFood()">Save Meal</button></div><div class="card"><h3>Today</h3><div id="nutritionBox"></div></div><div class="card"><h3>Food Log</h3><div id="foodLogs"></div></div></section>
-<section id="log"><div class="card"><h2>Quick Log</h2><label>Exercise</label><input id="quickExercise"><div class="grid3"><div><label>Sets</label><select id="sets"></select></div><div><label>Reps</label><select id="reps"></select></div><div><label>Weight kg</label><input id="weight" type="number" step="0.5"></div></div><label>RPE</label><select id="rpe"></select><label>Notes</label><textarea id="notes"></textarea><button onclick="saveQuick()">Save Log</button></div><div class="card"><h3>Recent Logs</h3><div id="logs"></div></div></section>
-<section id="prs"><div class="card"><h2>Automatic PR Board</h2><div id="prBox"></div></div></section>
-</main><div class="footer"><button onclick="show('mission')">Mission</button><button onclick="show('active')">Active</button><button onclick="show('blocks')">Blocks</button><button onclick="show('run')">Run</button><button onclick="show('prs')">PRs</button></div><script src="app.js"></script></body></html>
+<button class="tab active" onclick="show('mission')">Mission</button>
+<button class="tab" onclick="show('active')">Active</button>
+<button class="tab" onclick="show('training')">Training</button>
+<button class="tab" onclick="show('running')">Running</button>
+<button class="tab" onclick="show('nutrition')">Nutrition</button>
+<button class="tab" onclick="show('recovery')">Recovery</button>
+<button class="tab" onclick="show('analytics')">Analytics</button>
+<button class="tab" onclick="show('blocks')">Blocks</button>
+<button class="tab" onclick="show('settings')">Settings</button>
+</div>
+<main>
+
+<section id="mission" class="active">
+<div class="card">
+<h2>Mission Control</h2>
+<div class="grid">
+<div class="metric"><span>Tactical Readiness</span><b id="dashReadiness">—</b></div>
+<div class="metric"><span>Today’s Calories</span><b id="dashCalories">0</b></div>
+<div class="metric"><span>Weekly KM</span><b id="dashKm">0</b></div>
+<div class="metric"><span>Current Block</span><b id="dashBlock">1</b></div>
+</div>
+</div>
+<div class="card">
+<h2>Start Today</h2>
+<label>Goal Mode</label><select id="goalMode" onchange="populateDays();previewMission()"></select>
+<label>Day</label><select id="missionDay" onchange="previewMission()"></select>
+<label>Readiness Override</label><select id="readinessOverride" onchange="previewMission()"><option value="auto">Use Readiness Score</option><option value="green">🟢 Green</option><option value="amber">🟡 Amber</option><option value="red">🔴 Red</option></select>
+<div id="missionPreview" class="card"></div>
+<button onclick="startMission()">Start Today’s Session</button>
+<button class="secondary" onclick="show('recovery')">Daily Recovery Check-In</button>
+</div>
+<div class="card"><h3>Coach Notes</h3><div id="coachNotes"></div></div>
+</section>
+
+<section id="active">
+<div class="card"><h2>Active Session</h2><div id="activeSession"></div></div>
+</section>
+
+<section id="training">
+<div class="card"><h2>Training Programs</h2><label>Program</label><select id="programView" onchange="renderProgram()"></select><div id="programBox"></div></div>
+<div class="card"><h2>Quick Strength Log</h2><label>Exercise</label><input id="quickExercise" placeholder="Bench Press"><div class="grid3"><div><label>Sets</label><select id="sets"></select></div><div><label>Reps</label><select id="reps"></select></div><div><label>Weight kg</label><input id="weight" type="number" step="0.5"></div></div><label>RPE</label><select id="rpe"></select><label>Notes</label><textarea id="notes"></textarea><button onclick="saveStrength()">Save Strength Log</button></div>
+<div class="card"><h3>Recent Strength Logs</h3><div id="strengthLogs"></div></div>
+</section>
+
+<section id="running">
+<div class="card"><h2>Running Command</h2><label>Run Plan Week</label><select id="runWeek" onchange="renderRunPlan()"><option>1</option><option>2</option><option>3</option><option>4</option></select><div id="runPlanBox"></div></div>
+<div class="card"><h2>Log Run</h2><label>Date</label><input id="runDate" type="date"><div class="grid3"><div><label>Distance km</label><input id="runDist" type="number" step="0.1"></div><div><label>Time</label><input id="runTime" placeholder="25:00"></div><div><label>RPE</label><select id="runRpe"></select></div></div><label>Ankle Pain</label><select id="anklePain"></select><label>Notes</label><textarea id="runNotes"></textarea><button onclick="saveRun()">Save Run</button></div>
+<div class="card"><h3>Run Dashboard</h3><div id="runDash"></div></div>
+<div class="card"><h3>Run History</h3><div id="runLogs"></div></div>
+</section>
+
+<section id="nutrition">
+<div class="card"><h2>Nutrition Command</h2><div class="notice"><b>Food photo AI:</b> UI is ready. Live AI analysis requires backend/API connection so the OpenAI key is not exposed in GitHub Pages.</div><label>Food Photo</label><input type="file" accept="image/*" capture="environment" onchange="previewFoodPhoto(event)"><img id="foodPhotoPreview" class="preview"><button class="secondary" onclick="photoPlaceholder()">Analyse Photo</button><div id="photoResult"></div></div>
+<div class="card"><h2>Targets</h2><div class="grid"><div><label>Calories</label><input id="calTarget" type="number"></div><div><label>Protein g</label><input id="proteinTarget" type="number"></div></div><button onclick="saveTargets()">Save Targets</button></div>
+<div class="card"><h2>Add Meal</h2><label>Date</label><input id="foodDate" type="date"><label>Meal</label><input id="foodName" placeholder="Chicken rice bowl"><div class="grid3"><div><label>Calories</label><input id="foodCals" type="number"></div><div><label>Protein</label><input id="foodProtein" type="number"></div><div><label>Carbs</label><input id="foodCarbs" type="number"></div></div><label>Fat</label><input id="foodFat" type="number"><button onclick="saveFood()">Save Meal</button></div>
+<div class="card"><h3>Today’s Nutrition</h3><div id="nutritionDash"></div></div>
+<div class="card"><h3>Food Log</h3><div id="foodLogs"></div></div>
+</section>
+
+<section id="recovery">
+<div class="card"><h2>Recovery Check-In</h2><div class="grid3"><div><label>Sleep</label><select id="sleepScore"></select></div><div><label>Energy</label><select id="energyScore"></select></div><div><label>Soreness</label><select id="sorenessScore"></select></div></div><div class="grid3"><div><label>Stress</label><select id="stressScore"></select></div><div><label>Motivation</label><select id="motivationScore"></select></div><div><label>Ankle</label><select id="recoveryAnkle"></select></div></div><label>Notes</label><textarea id="recoveryNotes"></textarea><button onclick="saveRecovery()">Save Recovery</button></div>
+<div class="card"><h2>Readiness Score</h2><div id="readinessBox"></div></div>
+<div class="card"><h3>Recovery History</h3><div id="recoveryLogs"></div></div>
+</section>
+
+<section id="analytics">
+<div class="card"><h2>Analytics</h2><div class="grid"><div class="metric"><span>Strength Logs</span><b id="aStrength">0</b></div><div class="metric"><span>Runs</span><b id="aRuns">0</b></div><div class="metric"><span>PRs</span><b id="aPRs">0</b></div><div class="metric"><span>Avg Readiness</span><b id="aRecovery">—</b></div></div></div>
+<div class="card"><h3>Automatic PR Board</h3><div id="prBox"></div></div>
+</section>
+
+<section id="blocks">
+<div class="card"><h2>Adaptive 4-Week Block Engine</h2><div class="small">Reviews completion, PRs, running, ankle pain, RPE and readiness. Then recommends Progress, Repeat, Deload or Variation.</div><div id="blockStatus"></div><button onclick="reviewBlock()">Run Block Review</button> <button class="secondary" onclick="generateBlock()">Generate Next Block</button> <button class="green" onclick="applyBlock()">Apply Recommended Block</button></div>
+<div class="card"><h3>Block Review</h3><div id="blockReview"></div></div>
+<div class="card"><h3>Next Block Preview</h3><div id="nextBlock"></div></div>
+</section>
+
+<section id="settings">
+<div class="card"><h2>Settings</h2><label>Current Block Number</label><input id="blockSetting" type="number" min="1"><button onclick="saveSettings()">Save Settings</button><button class="secondary" onclick="exportData()">Export Backup</button><button class="red" onclick="resetActive()">Clear Active Session</button></div>
+</section>
+
+</main>
+<div class="footer"><button onclick="show('mission')">Mission</button><button onclick="show('active')">Active</button><button onclick="show('running')">Run</button><button onclick="show('nutrition')">Food</button><button onclick="show('blocks')">Blocks</button></div>
+<script src="app.js"></script>
+</body>
+</html>
