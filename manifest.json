@@ -1,7 +1,6 @@
 {
-  "name": "TacticalFit V9",
+  "name": "TacticalFit V10",
   "short_name": "TacticalFit",
-  "description": "Training, running, nutrition and PR tracking.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1115",
